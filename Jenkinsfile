@@ -9,13 +9,20 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir('user-management') {
+                    // Ejecutar npm install dentro de user-management
+                    sh 'npm install'
+                }
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                dir('user-management') {
+                    // Ejecutar npm test dentro de user-management
+                    sh 'npm test'
+                }
             }
         }
+        // Otras etapas de tu pipeline aquí
     }
 }
