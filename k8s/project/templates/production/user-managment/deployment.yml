@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: auth-service
+  name: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-management
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: user-management
+    spec:
+      containers:
+        - image: # actualizar imagen de donde se pullea
+          name: user-management
+          imagePullPolicy: IfNotPresent
+          command: ["npm"]
+          args: ["run", "start:dev"]
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: DB_HOST
+              value: "db"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASSWORD
+              value: "123456"
+            - name: DB_NAME
+              value: "user_management"
+          resources: {}
+status: {}

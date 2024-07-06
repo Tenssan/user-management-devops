@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: user-managment
+  name: user-managment
+spec:
+  ports:
+    - name: "3000"
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: user-managment
+  type: ClusterIP
+status:
+  loadBalancer: {}
