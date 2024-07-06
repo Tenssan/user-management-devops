@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: auth-service
-  name: auth-service
+    app: user-management
+  name: user-management
 spec:
   replicas: 1
   selector:
@@ -18,23 +18,15 @@ spec:
         app: user-management
     spec:
       containers:
-        - image: # actualizar imagen de donde se pullea
+        - image: dbassa/user-management
           name: user-management
           imagePullPolicy: IfNotPresent
           command: ["npm"]
           args: ["run", "start:dev"]
           env:
-            - name: NODE_ENV
-              value: "production"
-            - name: DB_HOST
-              value: "db"
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_USERNAME
-              value: "postgres"
-            - name: DB_PASSWORD
-              value: "123456"
-            - name: DB_NAME
-              value: "user_management"
+            - name: PORT
+              value: "3000"
+            - name: DATABASE_PATH
+              value: "database/db.sqlite"
           resources: {}
 status: {}
