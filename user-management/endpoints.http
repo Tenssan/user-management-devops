@@ -1,0 +1,64 @@
+# PUEDEN USAR ESTE ARCHIVO DENTRO DE VSCODE CON LA
+# EXTENSION "REST Client"
+# IGUALMENTE, SI LO DESEAN, PUEDEN UTILIZAR OTRO CLIENTE
+# COMO POSTMAN, INSOMNIA O SIMILAR
+
+@bff_url = http://localhost:3100
+@um_url = http://localhost:3101
+
+# ####################################
+#               BFF MS
+# ####################################
+
+### LOGIN USER
+POST {{bff_url}}/login
+Content-Type: application/json
+
+{
+  "email": "test-user@testing.com",
+  "password": "admin"
+}
+
+### GET USERS FOR PANEL VIEW
+GET {{bff_url}}/panel/users
+
+
+# ####################################
+#          USER MANAGEMENT MS
+# ####################################
+
+### LOGIN USER
+POST {{um_url}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test-user@testing.com",
+  "password": "admin"
+}
+
+### GET USERS
+GET {{um_url}}/users
+
+### GET USER BY ID
+GET {{um_url}}/users/5
+
+### CREATE AN USER
+POST {{um_url}}/users
+Content-Type: application/json
+
+{
+  "name": "Usuario 1",
+  "email": "test-user@testing.com",
+  "password": "admin"
+}
+
+### UPDATE AN USER
+PATCH {{um_url}}/users/5
+Content-Type: application/json
+
+{
+  "name": "Usuario por Defecto"
+}
+
+### DELETE AN USER
+DELETE {{um_url}}/users/4
