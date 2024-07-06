@@ -1,26 +1,20 @@
-# Use an official Node runtime as a parent image
+# Dockerfile
 FROM node:lts-alpine
 
-# Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Instala las dependencias
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copia la aplicación
 COPY . .
 
-# Ensure the database folder is copied correctly
-COPY src/database /usr/src/app/src/database
+# Instala SQLite y configura el entorno
+RUN apk update && apk add --no-cache sqlite sqlite-dev
 
-# Build the NestJS application
-RUN npm run build
-
-# Expose the port the app runs on
+# Exponer el puerto
 EXPOSE 3000
 
-# Run the app
-CMD ["node", "dist/main"]
+# Comando por defecto para ejecutar la aplicación
+CMD ["npm", "run", "start:dev"]
