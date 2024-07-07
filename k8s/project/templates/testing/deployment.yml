@@ -18,8 +18,8 @@ spec:
         app: user-management-testing
     spec:
       containers:
-        - image: dbassa/user-management #cambiar imagen de prod a testing
-          name: user-management
+        - image: dbassa/user-management:latest
+          name: user-management-testing
           imagePullPolicy: IfNotPresent
           command: ["npm"]
           args: ["run", "start:dev"]
